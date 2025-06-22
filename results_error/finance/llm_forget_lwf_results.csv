@@ -1,0 +1,26 @@
+,run_id,task_id,FN,FP,hallucination
+0,1,1,0,0,[]
+1,1,2,0,2,"['Subsidiary', 'Subsidiary', 'Subsidiary', 'Subsidiary', '[/INST]', 'Subsidiary', 'Subsidiary', 'Subsidiary', 'Subsidiary', 'Subsidiary', 'Subsidiary', 'Subsidiary', 'Subsidiary', 'e1', 'Subsidiary', 'Subsidiary', 'Subsidiary', '1>']"
+2,1,3,0,2,"['Subsidiary', 'Subsidiary', 'Subsidiary', 'Subsidiary', '[/INST]', 'Subsidiary', 'Subsidiary', 'Subsidiary', 'Subsidiary', 'Subsidiary', 'Subsidiary', 'Subsidiary', 'Subsidiary', 'e1', 'Subsidiary', 'Subsidiary', 'Subsidiary', '1>', 'Subsidiary', 'e1>', 'Subsidiary', 'Subsidiary', 'Subsidiary', 'ProductStuffIncreaseby', 'e1>', 'Subsidiarytrack', '', '', 'e1>Sale/e1', 'Subsidiary']"
+3,1,4,0,2,"['Subsidiary', 'Subsidiary', 'Subsidiary', 'Subsidiary', '[/INST]', 'Subsidiary', 'Subsidiary', 'Subsidiary', 'Subsidiary', 'Subsidiary', 'Subsidiary', 'Subsidiary', 'Subsidiary', 'e1', 'Subsidiary', 'Subsidiary', 'Subsidiary', '1>', 'Subsidiary', 'e1>', 'Subsidiary', 'Subsidiary', 'Subsidiary', 'ProductStuffIncreaseby', 'e1>', 'Subsidiarytrack', '', '', 'e1>Sale/e1', 'Subsidiary', 'Subsidiaryin', 'Subsidiaryin', 'Subsidiaryin', 'Subsidiaryin', 'Subsidiaryin', 'Subsidiaryin', 'Productin', 'Subsidiaryin', 'Subsidiaryin', 'Productin', 'Subsidiaryin', 'Subsidiaryin', 'Subsidiaryin', 'Subsidiaryin', 'Subsidiaryin', 'Subsidiaryin']"
+4,1,5,0,2,"['Subsidiary', 'Subsidiary', 'Subsidiary', 'Subsidiary', '[/INST]', 'Subsidiary', 'Subsidiary', 'Subsidiary', 'Subsidiary', 'Subsidiary', 'Subsidiary', 'Subsidiary', 'Subsidiary', 'e1', 'Subsidiary', 'Subsidiary', 'Subsidiary', '1>', 'Subsidiary', 'e1>', 'Subsidiary', 'Subsidiary', 'Subsidiary', 'ProductStuffIncreaseby', 'e1>', 'Subsidiarytrack', '', '', 'e1>Sale/e1', 'Subsidiary', 'Subsidiaryin', 'Subsidiaryin', 'Subsidiaryin', 'Subsidiaryin', 'Subsidiaryin', 'Subsidiaryin', 'Productin', 'Subsidiaryin', 'Subsidiaryin', 'Productin', 'Subsidiaryin', 'Subsidiaryin', 'Subsidiaryin', 'Subsidiaryin', 'Subsidiaryin', 'Subsidiaryin', '1>damages/e1>', '1>', '1>', '1>', '1>bonus/e1>', 'Valueof', 'Budgetof', 'Budgetof', '1', 'Valueof', 'Valueof', 'Valueof', 'Valueof', 'Valueof', 'Valueof', 'Valueof', 'Payments', 'e1>Adjusted', 'Cashused', 'Cashused', '1>', 'Valueof', 'Valueof', 'Valueof', 'Valueof', 'Valueof', 'Valueof', 'Valueof', 'Valueof', 'Valueof', 'Valueof', '2>', 'Valueof', '1', 'Valueof', 'ValueStangeAdjustable']"
+5,2,1,0,0,[]
+6,2,2,0,2,"['e1>', 'Product']"
+7,2,3,0,2,"['e1>', 'Product', 'ProductOrigin', 'Subsequent Event', 'Product', 'ProductChangeIncreaseby', 'Product', 'Sale']"
+8,2,4,0,2,"['e1>', 'Product', 'ProductOrigin', 'Subsequent Event', 'Product', 'ProductChangeIncreaseby', 'Product', 'Sale', 'Productin', 'e2']"
+9,2,5,0,4,"['e1>', 'Product', 'ProductOrigin', 'Subsequent Event', 'Product', 'ProductChangeIncreaseby', 'Product', 'Sale', 'Productin', 'e2', 'Valueof', 'Budgetof', 'Budgetof', 'ValueInst', 'Valueof', 'Valueof', 'Valueof', 'Valueof', 'Valueof', 'Payments/e1>', 'Valueof', 'Valueof', 'Valueof', 'Valueof', 'Valueof', 'Employees/e1>', 'Valueof', 'e2', '[/INST]', 'Valueof', 'Valueof']"
+10,3,1,0,0,[]
+11,3,2,0,2,"['e1>', 'Product']"
+12,3,3,0,2,"['e1>', 'Product', 'ProductOrigin', 'Subsequent Event', 'Product', 'ProductChangeIncreaseby', 'Product', 'Sale']"
+13,3,4,0,2,"['e1>', 'Product', 'ProductOrigin', 'Subsequent Event', 'Product', 'ProductChangeIncreaseby', 'Product', 'Sale', 'Productin', 'e2']"
+14,3,5,0,4,"['e1>', 'Product', 'ProductOrigin', 'Subsequent Event', 'Product', 'ProductChangeIncreaseby', 'Product', 'Sale', 'Productin', 'e2', 'Valueof', 'Budgetof', 'Budgetof', 'ValueInst', 'Valueof', 'Valueof', 'Valueof', 'Valueof', 'Valueof', 'Payments/e1>', 'Valueof', 'Valueof', 'Valueof', 'Valueof', 'Valueof', 'Employees/e1>', 'Valueof', 'e2', '[/INST]', 'Valueof', 'Valueof']"
+15,4,1,0,0,[]
+16,4,2,0,2,"['e1>', 'Product']"
+17,4,3,0,2,"['e1>', 'Product', 'ProductOrigin', 'Subsequent Event', 'Product', 'ProductChangeIncreaseby', 'Product', 'Sale']"
+18,4,4,0,2,"['e1>', 'Product', 'ProductOrigin', 'Subsequent Event', 'Product', 'ProductChangeIncreaseby', 'Product', 'Sale', 'Productin', 'e2']"
+19,4,5,0,4,"['e1>', 'Product', 'ProductOrigin', 'Subsequent Event', 'Product', 'ProductChangeIncreaseby', 'Product', 'Sale', 'Productin', 'e2', 'Valueof', 'Budgetof', 'Budgetof', 'ValueInst', 'Valueof', 'Valueof', 'Valueof', 'Valueof', 'Valueof', 'Payments/e1>', 'Valueof', 'Valueof', 'Valueof', 'Valueof', 'Valueof', 'Employees/e1>', 'Valueof', 'e2', '[/INST]', 'Valueof', 'Valueof']"
+20,5,1,0,0,[]
+21,5,2,0,2,"['e1>', 'Product']"
+22,5,3,0,2,"['e1>', 'Product', 'ProductOrigin', 'Subsequent Event', 'Product', 'ProductChangeIncreaseby', 'Product', 'Sale']"
+23,5,4,0,2,"['e1>', 'Product', 'ProductOrigin', 'Subsequent Event', 'Product', 'ProductChangeIncreaseby', 'Product', 'Sale', 'Productin', 'e2']"
+24,5,5,0,4,"['e1>', 'Product', 'ProductOrigin', 'Subsequent Event', 'Product', 'ProductChangeIncreaseby', 'Product', 'Sale', 'Productin', 'e2', 'Valueof', 'Budgetof', 'Budgetof', 'ValueInst', 'Valueof', 'Valueof', 'Valueof', 'Valueof', 'Valueof', 'Payments/e1>', 'Valueof', 'Valueof', 'Valueof', 'Valueof', 'Valueof', 'Employees/e1>', 'Valueof', 'e2', '[/INST]', 'Valueof', 'Valueof']"
