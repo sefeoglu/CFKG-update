@@ -26,6 +26,18 @@ share/python-wheels/
 .installed.cfg
 *.egg
 MANIFEST
+*.zip
+results/
+results_*
+llm_forget/
+llm_forget *
+results_error/
+slurm-outs/
+dataset/
+dataset_*
+mix/
+*.DS_Store
+FSCRE/
 
 # PyInstaller
 #  Usually these files are written by a python script from a template
