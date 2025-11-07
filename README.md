@@ -1,6 +1,8 @@
-# Continual Factual Knowledge Graph Updates with Large Language Models and Catastrophic Forgetting Approaches
+## Continual Factual Knowledge Graph Updates
 
-![method](https://github.com/sefeoglu/llm-catastrophic-re/blob/master/figs/method.png)
+<p align="center">
+  <img src="https://github.com/sefeoglu/llm-catastrophic-re/blob/master/figs/method.png" width="500"/>
+</p>
 
 LLM with Catastrophic Forgetting approaches:
 * SI : Synaptic Intelligence
