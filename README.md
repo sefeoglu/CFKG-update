@@ -3,7 +3,8 @@
 <p align="center">
   <img src="https://github.com/sefeoglu/llm-catastrophic-re/blob/master/figs/method.png" width="500"/>
 </p>
-## Hallucination Taxonomy (ASCII Diagram)
+
+## Hallucination Taxonomy
 
 ```text
                              +--------------------------------------+
