@@ -1,3 +1,4 @@
+```text
 Relations
 ├── Social / Temporal
 │    └── follows ↔ followed_by
@@ -22,3 +23,4 @@ Relations
      └── Territorial Containment
           ├── located_in_the_administrative_territorial_entity
           └── contains_administrative_territorial_entity
+```
