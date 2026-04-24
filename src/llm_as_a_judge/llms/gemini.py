@@ -50,9 +50,9 @@ def bulk_test(templates, out_file, config):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Combine contextual information from multiple sources.")
-    parser.add_argument("--input_file", type=str, default="/Users/sefika/phd_projects/llm-catastrophic-re/rationale_nli/fewrel_mas_top_prob_5/model_5/test_pred_8_prompts.json", help="Path to the input JSON file containing contextual information.")
-    parser.add_argument("--output_file", type=str, default="/Users/sefika/phd_projects/llm-catastrophic-re/results_rationale_nli/gemini/fewrel_mas_top_prob_5/model_5/test_pred_8_prompts_1.json", help="Path to the output JSON file to save combined information.")
-    parser.add_argument("--config", type=str, default="/Users/sefika/phd_projects/converse_relations/data/gemini_key.json", help="Path to the config JSON file.")
+    parser.add_argument("--input_file", type=str, default="../llm-catastrophic-re/rationale_nli/fewrel_mas_top_prob_5/model_5/test_pred_8_prompts.json", help="Path to the input JSON file containing contextual information.")
+    parser.add_argument("--output_file", type=str, default="../llm-catastrophic-re/results_rationale_nli/gemini/fewrel_mas_top_prob_5/model_5/test_pred_8_prompts_1.json", help="Path to the output JSON file to save combined information.")
+    parser.add_argument("--config", type=str, default="../converse_relations/data/gemini_key.json", help="Path to the config JSON file.")
     
     args = parser.parse_args()
     input_data = read_json(args.input_file)[4324:]
