@@ -1,7 +1,7 @@
 ## Continual Factual Knowledge Graph Updates
 
 <p align="center">
-  <img src="https://github.com/sefeoglu/llm-catastrophic-re/blob/master/figs/method.png" width="500"/>
+  <img src="https://github.com/sefeoglu/CFKG-update/blob/master/figs/pipeline_method.pdf" width="500"/>
 </p>
 
 ## Hallucination Taxonomy
