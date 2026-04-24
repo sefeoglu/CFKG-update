@@ -7,7 +7,7 @@
 
 
 This repository contains the implementation of a framework combining **continual few-shot relation extraction** with **schema-aware symbolic validation**. The approach leverages synaptic regularization methods and a SHACL-based symbolic memory layer to mitigate catastrophic forgetting and distinguish between true hallucinations and semantically valid out-of-schema predictions.
-
+The article of the repository has been submitted to Journal of Web Semantics.
 ## Overview
 
 Large Language Models (LLMs) used for Knowledge Graph (KG) construction often suffer from **catastrophic forgetting** in dynamic environment. Furthermore, they frequently generate relations that, while semantically valid in an open-world scenario, are treated as errors because they fall outside predefined schemas. 
