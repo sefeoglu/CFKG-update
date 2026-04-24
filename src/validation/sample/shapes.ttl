@@ -1,0 +1,112 @@
+@prefix sh:  <http://www.w3.org/ns/shacl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix :    <http://example.org/family/> .
+
+################################################
+# Validate :child is used as Person -> Person
+# - subject must be a :Person
+# - object must be a :Person
+################################################
+:ChildTypingShape a sh:NodeShape ;
+  sh:targetSubjectsOf :child ;
+
+  # subject typing
+  sh:property [
+    sh:path rdf:type ;
+    sh:hasValue :Person ;
+    sh:message "{\"type\":\"ERROR\",\"code\":\"SUBJECT_NOT_PERSON\",\"details\":\"Subject of :child must be a :Person\"}" ;
+  ] ;
+
+  # object typing
+  sh:property [
+    sh:path :child ;
+    sh:class :Person ;
+    sh:message "{\"type\":\"ERROR\",\"code\":\"OBJECT_NOT_PERSON\",\"details\":\"Object of :child must be a :Person\"}" ;
+  ] .
+
+################################################
+# Validate :son / :daughter are consistent with :child
+# (These are *not* suggestions; they are checks that create
+# JSON messages of other types.)
+################################################
+
+:SonImpliesChildShape a sh:NodeShape ;
+  sh:targetSubjectsOf :son ;
+  sh:severity sh:Warning ;
+  sh:sparql [
+    sh:message "{\"type\":\"WARNING\",\"code\":\"SON_MISSING_CHILD\",\"details\":\"If :son is asserted, :child should also be asserted (or inferred)\"}" ;
+    sh:select """
+      SELECT $this ?path ?value WHERE {
+        $this :son ?value .
+        FILTER NOT EXISTS { $this :child ?value . }
+        BIND(:son AS ?path)
+      }
+    """ ;
+  ] .
+
+:DaughterImpliesChildShape a sh:NodeShape ;
+  sh:targetSubjectsOf :daughter ;
+  sh:severity sh:Warning ;
+  sh:sparql [
+    sh:message "{\"type\":\"WARNING\",\"code\":\"DAUGHTER_MISSING_CHILD\",\"details\":\"If :daughter is asserted, :child should also be asserted (or inferred)\"}" ;
+    sh:select """
+      SELECT $this ?path ?value WHERE {
+        $this :daughter ?value .
+        FILTER NOT EXISTS { $this :child ?value . }
+        BIND(:daughter AS ?path)
+      }
+    """ ;
+  ] .
+
+################################################
+# Parsable suggestions (your original idea)
+# IMPORTANT:
+# - We bind ?path and ?value so the engine can populate
+#   sh:resultPath and sh:value.
+################################################
+
+:SonSuggestionShape a sh:NodeShape ;
+  sh:targetSubjectsOf :son ;
+  sh:severity sh:Info ;
+  sh:sparql [
+    sh:message "{\"type\":\"SUGGEST_RELATIONS\",\"detected\":\"son\",\"suggest\":[\"son\",\"child\"]}" ;
+    sh:select """
+      SELECT $this ?path ?value WHERE {
+        $this :son ?value .
+        BIND(:son AS ?path)
+      }
+    """ ;
+  ] .
+
+:DaughterSuggestionShape a sh:NodeShape ;
+  sh:targetSubjectsOf :daughter ;
+  sh:severity sh:Info ;
+  sh:sparql [
+    sh:message "{\"type\":\"SUGGEST_RELATIONS\",\"detected\":\"daughter\",\"suggest\":[\"daughter\",\"child\"]}" ;
+    sh:select """
+      SELECT $this ?path ?value WHERE {
+        $this :daughter ?value .
+        BIND(:daughter AS ?path)
+      }
+    """ ;
+  ] .
+
+################################################
+# Extra: detect likely mismatch for your LLM prediction
+# If you assert :daughter but the object is typed :Male,
+# emit JSON ERROR (non-suggestion).
+################################################
+
+:DaughterMaleMismatchShape a sh:NodeShape ;
+  sh:targetSubjectsOf :daughter ;
+  sh:severity sh:Violation ;
+  sh:sparql [
+    sh:message "{\"type\":\"ERROR\",\"code\":\"DAUGHTER_RANGE_MALE\",\"details\":\"Object of :daughter is typed :Male; expected :Female\"}" ;
+    sh:select """
+      SELECT $this ?path ?value WHERE {
+        $this :daughter ?value .
+        ?value rdf:type :Male .
+        BIND(:daughter AS ?path)
+      }
+    """ ;
+  ] .

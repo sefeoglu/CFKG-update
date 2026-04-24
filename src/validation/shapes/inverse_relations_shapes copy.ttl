@@ -1,0 +1,442 @@
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix :  <http://example.org/relations/> .
+
+################################################
+# Inverse-set suggestion constraints
+# Rule: if relation R is detected, suggest ONLY the other relations in the SAME list.
+################################################
+
+########## ["follows", "followed_by"] ##########
+
+:Suggest_follows__set1 a sh:NodeShape ;
+  sh:targetSubjectsOf :follows ;
+  sh:severity sh:Info ;
+  sh:sparql [
+    sh:message """{"type":"SUGGEST_RELATIONS","detected":"follows","suggest":["followed_by"]}""" ;
+    sh:select """
+PREFIX : <http://example.org/relations/>
+SELECT $this ?path ?value WHERE {
+  $this :follows ?value .
+  BIND(:follows AS ?path)
+}
+""" ;
+  ] .
+
+:Suggest_followed_by__set1 a sh:NodeShape ;
+  sh:targetSubjectsOf :followed_by ;
+  sh:severity sh:Info ;
+  sh:sparql [
+    sh:message """{"type":"SUGGEST_RELATIONS","detected":"followed_by","suggest":["follows"]}""" ;
+    sh:select """
+PREFIX : <http://example.org/relations/>
+SELECT $this ?path ?value WHERE {
+  $this :followed_by ?value .
+  BIND(:followed_by AS ?path)
+}
+""" ;
+  ] .
+
+########## ["father", "child"] ##########
+
+:Suggest_father__set2 a sh:NodeShape ;
+  sh:targetSubjectsOf :father ;
+  sh:severity sh:Info ;
+  sh:sparql [
+    sh:message """{"type":"SUGGEST_RELATIONS","detected":"father","suggest":["child"]}""" ;
+    sh:select """
+PREFIX : <http://example.org/relations/>
+SELECT $this ?path ?value WHERE {
+  $this :father ?value .
+  BIND(:father AS ?path)
+}
+""" ;
+  ] .
+
+:Suggest_child__set2 a sh:NodeShape ;
+  sh:targetSubjectsOf :child ;
+  sh:severity sh:Info ;
+  sh:sparql [
+    sh:message """{"type":"SUGGEST_RELATIONS","detected":"child","suggest":["father"]}""" ;
+    sh:select """
+PREFIX : <http://example.org/relations/>
+SELECT $this ?path ?value WHERE {
+  $this :child ?value .
+  BIND(:child AS ?path)
+}
+""" ;
+  ] .
+
+########## ["mother", "child"] ##########
+
+:Suggest_mother__set3 a sh:NodeShape ;
+  sh:targetSubjectsOf :mother ;
+  sh:severity sh:Info ;
+  sh:sparql [
+    sh:message """{"type":"SUGGEST_RELATIONS","detected":"mother","suggest":["child"]}""" ;
+    sh:select """
+PREFIX : <http://example.org/relations/>
+SELECT $this ?path ?value WHERE {
+  $this :mother ?value .
+  BIND(:mother AS ?path)
+}
+""" ;
+  ] .
+
+:Suggest_child__set3 a sh:NodeShape ;
+  sh:targetSubjectsOf :child ;
+  sh:severity sh:Info ;
+  sh:sparql [
+    sh:message """{"type":"SUGGEST_RELATIONS","detected":"child","suggest":["mother"]}""" ;
+    sh:select """
+PREFIX : <http://example.org/relations/>
+SELECT $this ?path ?value WHERE {
+  $this :child ?value .
+  BIND(:child AS ?path)
+}
+""" ;
+  ] .
+
+########## ["son", "parent"] ##########
+
+:Suggest_son__set4 a sh:NodeShape ;
+  sh:targetSubjectsOf :son ;
+  sh:severity sh:Info ;
+  sh:sparql [
+    sh:message """{"type":"SUGGEST_RELATIONS","detected":"son","suggest":["parent"]}""" ;
+    sh:select """
+PREFIX : <http://example.org/relations/>
+SELECT $this ?path ?value WHERE {
+  $this :son ?value .
+  BIND(:son AS ?path)
+}
+""" ;
+  ] .
+
+:Suggest_parent__set4 a sh:NodeShape ;
+  sh:targetSubjectsOf :parent ;
+  sh:severity sh:Info ;
+  sh:sparql [
+    sh:message """{"type":"SUGGEST_RELATIONS","detected":"parent","suggest":["son"]}""" ;
+    sh:select """
+PREFIX : <http://example.org/relations/>
+SELECT $this ?path ?value WHERE {
+  $this :parent ?value .
+  BIND(:parent AS ?path)
+}
+""" ;
+  ] .
+
+########## ["daughter", "parent"] ##########
+
+:Suggest_daughter__set5 a sh:NodeShape ;
+  sh:targetSubjectsOf :daughter ;
+  sh:severity sh:Info ;
+  sh:sparql [
+    sh:message """{"type":"SUGGEST_RELATIONS","detected":"daughter","suggest":["parent"]}""" ;
+    sh:select """
+PREFIX : <http://example.org/relations/>
+SELECT $this ?path ?value WHERE {
+  $this :daughter ?value .
+  BIND(:daughter AS ?path)
+}
+""" ;
+  ] .
+
+:Suggest_parent__set5 a sh:NodeShape ;
+  sh:targetSubjectsOf :parent ;
+  sh:severity sh:Info ;
+  sh:sparql [
+    sh:message """{"type":"SUGGEST_RELATIONS","detected":"parent","suggest":["daughter"]}""" ;
+    sh:select """
+PREFIX : <http://example.org/relations/>
+SELECT $this ?path ?value WHERE {
+  $this :parent ?value .
+  BIND(:parent AS ?path)
+}
+""" ;
+  ] .
+
+########## ["son", "child"] ##########
+
+:Suggest_son__set6 a sh:NodeShape ;
+  sh:targetSubjectsOf :son ;
+  sh:severity sh:Info ;
+  sh:sparql [
+    sh:message """{"type":"SUGGEST_RELATIONS","detected":"son","suggest":["child"]}""" ;
+    sh:select """
+PREFIX : <http://example.org/relations/>
+SELECT $this ?path ?value WHERE {
+  $this :son ?value .
+  BIND(:son AS ?path)
+}
+""" ;
+  ] .
+
+:Suggest_child__set6 a sh:NodeShape ;
+  sh:targetSubjectsOf :child ;
+  sh:severity sh:Info ;
+  sh:sparql [
+    sh:message """{"type":"SUGGEST_RELATIONS","detected":"child","suggest":["son"]}""" ;
+    sh:select """
+PREFIX : <http://example.org/relations/>
+SELECT $this ?path ?value WHERE {
+  $this :child ?value .
+  BIND(:child AS ?path)
+}
+""" ;
+  ] .
+
+########## ["daughter", "child"] ##########
+
+:Suggest_daughter__set7 a sh:NodeShape ;
+  sh:targetSubjectsOf :daughter ;
+  sh:severity sh:Info ;
+  sh:sparql [
+    sh:message """{"type":"SUGGEST_RELATIONS","detected":"daughter","suggest":["child"]}""" ;
+    sh:select """
+PREFIX : <http://example.org/relations/>
+SELECT $this ?path ?value WHERE {
+  $this :daughter ?value .
+  BIND(:daughter AS ?path)
+}
+""" ;
+  ] .
+
+:Suggest_child__set7 a sh:NodeShape ;
+  sh:targetSubjectsOf :child ;
+  sh:severity sh:Info ;
+  sh:sparql [
+    sh:message """{"type":"SUGGEST_RELATIONS","detected":"child","suggest":["daughter"]}""" ;
+    sh:select """
+PREFIX : <http://example.org/relations/>
+SELECT $this ?path ?value WHERE {
+  $this :child ?value .
+  BIND(:child AS ?path)
+}
+""" ;
+  ] .
+
+########## ["parent", "child"] ##########
+
+:Suggest_parent__set8 a sh:NodeShape ;
+  sh:targetSubjectsOf :parent ;
+  sh:severity sh:Info ;
+  sh:sparql [
+    sh:message """{"type":"SUGGEST_RELATIONS","detected":"parent","suggest":["child"]}""" ;
+    sh:select """
+PREFIX : <http://example.org/relations/>
+SELECT $this ?path ?value WHERE {
+  $this :parent ?value .
+  BIND(:parent AS ?path)
+}
+""" ;
+  ] .
+
+:Suggest_child__set8 a sh:NodeShape ;
+  sh:targetSubjectsOf :child ;
+  sh:severity sh:Info ;
+  sh:sparql [
+    sh:message """{"type":"SUGGEST_RELATIONS","detected":"child","suggest":["parent"]}""" ;
+    sh:select """
+PREFIX : <http://example.org/relations/>
+SELECT $this ?path ?value WHERE {
+  $this :child ?value .
+  BIND(:child AS ?path)
+}
+""" ;
+  ] .
+
+########## ["family", "child"] ##########
+
+:Suggest_family__set9 a sh:NodeShape ;
+  sh:targetSubjectsOf :family ;
+  sh:severity sh:Info ;
+  sh:sparql [
+    sh:message """{"type":"SUGGEST_RELATIONS","detected":"family","suggest":["child"]}""" ;
+    sh:select """
+PREFIX : <http://example.org/relations/>
+SELECT $this ?path ?value WHERE {
+  $this :family ?value .
+  BIND(:family AS ?path)
+}
+""" ;
+  ] .
+
+:Suggest_child__set9 a sh:NodeShape ;
+  sh:targetSubjectsOf :child ;
+  sh:severity sh:Info ;
+  sh:sparql [
+    sh:message """{"type":"SUGGEST_RELATIONS","detected":"child","suggest":["family"]}""" ;
+    sh:select """
+PREFIX : <http://example.org/relations/>
+SELECT $this ?path ?value WHERE {
+  $this :child ?value .
+  BIND(:child AS ?path)
+}
+""" ;
+  ] .
+
+########## ["sibling", "sibling"] ##########
+# NOTE: this set would suggest nothing (other-than-self), so it's omitted.
+
+########## ["spouse", "husband"] ##########
+
+:Suggest_spouse__set11 a sh:NodeShape ;
+  sh:targetSubjectsOf :spouse ;
+  sh:severity sh:Info ;
+  sh:sparql [
+    sh:message """{"type":"SUGGEST_RELATIONS","detected":"spouse","suggest":["husband"]}""" ;
+    sh:select """
+PREFIX : <http://example.org/relations/>
+SELECT $this ?path ?value WHERE {
+  $this :spouse ?value .
+  BIND(:spouse AS ?path)
+}
+""" ;
+  ] .
+
+:Suggest_husband__set11 a sh:NodeShape ;
+  sh:targetSubjectsOf :husband ;
+  sh:severity sh:Info ;
+  sh:sparql [
+    sh:message """{"type":"SUGGEST_RELATIONS","detected":"husband","suggest":["spouse"]}""" ;
+    sh:select """
+PREFIX : <http://example.org/relations/>
+SELECT $this ?path ?value WHERE {
+  $this :husband ?value .
+  BIND(:husband AS ?path)
+}
+""" ;
+  ] .
+
+########## ["spouse", "wife"] ##########
+
+:Suggest_spouse__set12 a sh:NodeShape ;
+  sh:targetSubjectsOf :spouse ;
+  sh:severity sh:Info ;
+  sh:sparql [
+    sh:message """{"type":"SUGGEST_RELATIONS","detected":"spouse","suggest":["wife"]}""" ;
+    sh:select """
+PREFIX : <http://example.org/relations/>
+SELECT $this ?path ?value WHERE {
+  $this :spouse ?value .
+  BIND(:spouse AS ?path)
+}
+""" ;
+  ] .
+
+:Suggest_wife__set12 a sh:NodeShape ;
+  sh:targetSubjectsOf :wife ;
+  sh:severity sh:Info ;
+  sh:sparql [
+    sh:message """{"type":"SUGGEST_RELATIONS","detected":"wife","suggest":["spouse"]}""" ;
+    sh:select """
+PREFIX : <http://example.org/relations/>
+SELECT $this ?path ?value WHERE {
+  $this :wife ?value .
+  BIND(:wife AS ?path)
+}
+""" ;
+  ] .
+
+########## ["child", "parent", "mother", "family", "father"] ##########
+
+:Suggest_child__set13 a sh:NodeShape ;
+  sh:targetSubjectsOf :child ;
+  sh:severity sh:Info ;
+  sh:sparql [
+    sh:message """{"type":"SUGGEST_RELATIONS","detected":"child","suggest":["parent","mother","family","father"]}""" ;
+    sh:select """
+PREFIX : <http://example.org/relations/>
+SELECT $this ?path ?value WHERE {
+  $this :child ?value .
+  BIND(:child AS ?path)
+}
+""" ;
+  ] .
+
+:Suggest_parent__set13 a sh:NodeShape ;
+  sh:targetSubjectsOf :parent ;
+  sh:severity sh:Info ;
+  sh:sparql [
+    sh:message """{"type":"SUGGEST_RELATIONS","detected":"parent","suggest":["child","mother","family","father"]}""" ;
+    sh:select """
+PREFIX : <http://example.org/relations/>
+SELECT $this ?path ?value WHERE {
+  $this :parent ?value .
+  BIND(:parent AS ?path)
+}
+""" ;
+  ] .
+
+:Suggest_mother__set13 a sh:NodeShape ;
+  sh:targetSubjectsOf :mother ;
+  sh:severity sh:Info ;
+  sh:sparql [
+    sh:message """{"type":"SUGGEST_RELATIONS","detected":"mother","suggest":["child","parent","family","father"]}""" ;
+    sh:select """
+PREFIX : <http://example.org/relations/>
+SELECT $this ?path ?value WHERE {
+  $this :mother ?value .
+  BIND(:mother AS ?path)
+}
+""" ;
+  ] .
+
+:Suggest_family__set13 a sh:NodeShape ;
+  sh:targetSubjectsOf :family ;
+  sh:severity sh:Info ;
+  sh:sparql [
+    sh:message """{"type":"SUGGEST_RELATIONS","detected":"family","suggest":["child","parent","mother","father"]}""" ;
+    sh:select """
+PREFIX : <http://example.org/relations/>
+SELECT $this ?path ?value WHERE {
+  $this :family ?value .
+  BIND(:family AS ?path)
+}
+""" ;
+  ] .
+
+:Suggest_father__set13 a sh:NodeShape ;
+  sh:targetSubjectsOf :father ;
+  sh:severity sh:Info ;
+  sh:sparql [
+    sh:message """{"type":"SUGGEST_RELATIONS","detected":"father","suggest":["child","parent","mother","family"]}""" ;
+    sh:select """
+PREFIX : <http://example.org/relations/>
+SELECT $this ?path ?value WHERE {
+  $this :father ?value .
+  BIND(:father AS ?path)
+}
+""" ;
+  ] .
+
+########## ["located_in_the_administrative_territorial_entity", "contains_administrative_territorial_entity"] ##########
+
+:Suggest_located_in_admin_territory__set14 a sh:NodeShape ;
+  sh:targetSubjectsOf :located_in_the_administrative_territorial_entity ;
+  sh:severity sh:Info ;
+  sh:sparql [
+    sh:message """{"type":"SUGGEST_RELATIONS","detected":"located_in_the_administrative_territorial_entity","suggest":["contains_administrative_territorial_entity"]}""" ;
+    sh:select """
+PREFIX : <http://example.org/relations/>
+SELECT $this ?path ?value WHERE {
+  $this :located_in_the_administrative_territorial_entity ?value .
+  BIND(:located_in_the_administrative_territorial_entity AS ?path)
+}
+""" ;
+  ] .
+
+:Suggest_contains_admin_territory__set14 a sh:NodeShape ;
+  sh:targetSubjectsOf :contains_administrative_territorial_entity ;
+  sh:severity sh:Info ;
+  sh:sparql [
+    sh:message """{"type":"SUGGEST_RELATIONS","detected":"contains_administrative_territorial_entity","suggest":["located_in_the_administrative_territorial_entity"]}""" ;
+    sh:select """
+PREFIX : <http://example.org/relations/>
+SELECT $this ?path ?value WHERE {
+  $this :contains_administrative_territorial_entity ?value .
+  BIND(:contains_administrative_territorial_entity AS ?path)
+}
+""" ;
+  ] .

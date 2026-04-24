@@ -1,0 +1,46 @@
+@prefix : <http://example.org/family/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+########################
+# People
+########################
+
+:alice a :Person ;
+       :follows :male ;
+       :age 25 .
+
+:bob   a :Person ;
+       :gender :Male ;
+       :age 50 .
+
+:carol a :Person ;
+       :gender :Female ;
+       :age 48 .
+
+:dave  a :Person ;
+       :gender :Male ;
+       :age 5 .
+
+########################
+# Family relations
+########################
+
+# LLM prediction (possibly wrong)
+:alice :follow :bob .
+
+# Ground-truth–style relations
+:bob   :daughter :alice .
+:carol :son :alice .
+
+:alice :follow :dave .
+:bob   :follow :dave .
+
+########################
+# Optional literals
+########################
+
+:alice :name "Alice" .
+:bob   :name "Bob" .
+:carol :name "Carol" .
+:dave  :name "Dave" .

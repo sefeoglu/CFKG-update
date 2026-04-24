@@ -1,0 +1,72 @@
+@prefix :    <http://example.org/family/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs:<http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+################################################
+# Classes
+################################################
+
+:Person a owl:Class .
+
+:Male   a owl:Class ;
+  rdfs:subClassOf :Person .
+
+:Female a owl:Class ;
+  rdfs:subClassOf :Person .
+
+################################################
+# Object Properties
+################################################
+
+:child a owl:ObjectProperty ;
+  rdfs:domain :Person ;
+  rdfs:range  :Person ;
+  owl:inverseOf :parent .
+
+:parent a owl:ObjectProperty ;
+  rdfs:domain :Person ;
+  rdfs:range  :Person .
+
+:son a owl:ObjectProperty ;
+  rdfs:subPropertyOf :child ;
+  rdfs:range :Male .
+
+:daughter a owl:ObjectProperty ;
+  rdfs:subPropertyOf :child ;
+  rdfs:range :Female .
+
+:father a owl:ObjectProperty ;
+  rdfs:subPropertyOf :parent ;
+  rdfs:domain :Male .
+
+:mother a owl:ObjectProperty ;
+  rdfs:subPropertyOf :parent ;
+  rdfs:domain :Female .
+
+:grandfather a owl:ObjectProperty ;
+  rdfs:subPropertyOf :parent ;
+  rdfs:domain :Male .
+
+################################################
+# Datatype Properties
+################################################
+
+:age a owl:DatatypeProperty ;
+  rdfs:domain :Person ;
+  rdfs:range xsd:integer .
+
+:name a owl:DatatypeProperty ;
+  rdfs:domain :Person ;
+  rdfs:range xsd:string .
+
+:gender a owl:ObjectProperty ;
+  rdfs:domain :Person ;
+  rdfs:range :Person .  # intentionally loose for SHACL checks
+
+################################################
+# Property chains (optional but powerful)
+################################################
+
+# parent ∘ parent → grandparent
+:parent owl:propertyChainAxiom ( :parent :parent ) .
