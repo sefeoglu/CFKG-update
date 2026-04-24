@@ -2,30 +2,33 @@
 """Created by: Sefika"""
 import sys
 import os
-
 import json
 import torch
-from transformers import AutoTokenizer
-from transformers import AutoModelForCausalLM
-from datetime import datetime
-from transformers import T5Tokenizer, T5ForConditionalGeneration
-from sklearn.metrics import accuracy_score, f1_score, precision_score, recall_score
-# from peft import  get_peft_model, LoraConfig, TaskType
-class LLM(object):
+from transformers import AutoTokenizer, T5Tokenizer, T5ForConditionalGeneration, AutoModelForCausalLM
 
+from datetime import datetime
+
+from sklearn.metrics import accuracy_score, f1_score, precision_score, recall_score
+
+
+
+class LLM(object):
+    
     def __init__(self, model_id="google/flan-t5-xl"):
         """
         Initialize the LLM model
         Args:
             model_id (str, optional): model name from Hugging Face. Defaults to "google/flan-t5-xl".
         """
-
+        self.maxmem={i:f'{int(torch.cuda.mem_get_info()[0]/1024**3)-2}GB' for i in range(4)}
+        self.maxmem['cpu']='300GB'
+        if model_id=="google/flan-t5-xl":
+            self.model, self.tokenizer = self.get_model(model_id)
+        else: 
+            self.model, self.tokenizer = self.get_model_decoder(model_id)
         
-        self.model, self.tokenizer = self.get_model(model_id)
-
-
-
-    def get_model(self, model_id="google/flan-t5-base"):
+        
+    def get_model(self, model_id="google/flan-t5-xl"):
         """_summary_
 
         Args:
@@ -35,17 +38,70 @@ class LLM(object):
             model: model from Hugging Face
             tokenizer: tokenizer of this model
         """
-        tokenizer = T5Tokenizer.from_pretrained("google/flan-t5-base")
-
-        model = T5ForConditionalGeneration.from_pretrained(model_id,
-                                                    device_map="auto",
-                                                    load_in_8bit=False,
-                                                    torch_dtype=torch.float16
-                                                    )
+        tokenizer = T5Tokenizer.from_pretrained(model_id)
+ 
+        model = T5ForConditionalGeneration.from_pretrained(model_id, 
+                                                    device_map="auto", 
+                                                    load_in_8bit=False, 
+                                                    torch_dtype=torch.float16,
+                                                    max_memory=self.maxmem)
         return model,tokenizer
+    
+    def get_prediction(self, prompt, length=30):
+        """_summary_
+
+        Args:
+            model : loaded model
+            tokenizer: loaded tokenizer
+            prompt (str): prompt to generate response 
+            length (int, optional): Response length. Defaults to 30.
+
+        Returns:
+            response (str): response from the model
+        """
+        if "Llama" in self.model:
+            return self.get_prediction_llama3(self.model, self.tokenizer, prompt, length)
+    
+        inputs = self.tokenizer(prompt, add_special_tokens=True, max_length=526,return_tensors="pt").input_ids.to("cuda")
+        
+        outputs = self.model.generate(inputs, max_new_tokens=length)
+        
+        response = self.tokenizer.batch_decode(outputs, skip_special_tokens=True)
+        
+        return response
 
 
+    def get_prediction_llama3(model,tokenizer, prompt, length=250,stype='greedy'):
+        messages = [
+        {"role": "system", "content": "You are a  chatbot who always responds the question"},
+        {"role": "user", "content": prompt},
+        ]
 
+        input_ids = tokenizer.apply_chat_template(
+            messages,
+            add_generation_prompt=True,
+            return_tensors="pt"
+        ).to(model.device) # Ensure input_ids are on the correct device
+
+        terminators = [
+            tokenizer.eos_token_id,
+            tokenizer.convert_tokens_to_ids("<|eot_id|>")]
+
+        outputs = model.generate(
+            input_ids,
+            max_new_tokens=length, # Use the passed length parameter
+            eos_token_id=terminators,
+            do_sample=True,
+            temperature=0.6,
+            top_p=0.9,
+        )
+        # Decode the generated response, excluding the input prompt tokens
+        response = tokenizer.batch_decode(outputs[:, input_ids.shape[-1]:], skip_special_tokens=True)[0]
+
+
+        return response
+
+    
     def get_model_decoder(self, model_id="meta-llama/Llama-2-7b-chat-hf"):
         """loades the model from Hugging Face such llama and mistral
 
@@ -57,14 +113,12 @@ class LLM(object):
             tokenizer: loaded tokenizer
         """
 
-        tokenizer = AutoTokenizer.from_pretrained("mistralai/Mistral-7B-Instruct-v0.2")
-        model = AutoModelForCausalLM.from_pretrained(model_id,
-                                                    device_map="auto",
-                                                    load_in_8bit=False,
+        tokenizer = AutoTokenizer.from_pretrained(model_id)
+        model = AutoModelForCausalLM.from_pretrained(model_id, 
+                                                    device_map="balanced", 
+                                                    load_in_8bit=False, 
                                                     torch_dtype=torch.float16,
-                                                    # max_memory=self.maxmem
-                                                    )
-        # max_memory=self.maxmem
+                                                    max_memory=self.maxmem)
         return model,tokenizer
 
 def read_json(path):

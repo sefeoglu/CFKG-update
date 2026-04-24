@@ -50,6 +50,7 @@ def compute_fisher(model, dataloader):
         fisher[name] /= total_samples
 
     return fisher
+
 class EWCTrainer(Seq2SeqTrainer):
     def __init__(self, *args, fisher=None, old_params=None, ewc_lambda=0.4, **kwargs):
         super().__init__(*args, **kwargs)

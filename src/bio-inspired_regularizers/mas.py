@@ -18,7 +18,7 @@ class MASTrainer(Seq2SeqTrainer):
         # MAS regularization
         if self.old_params and self.importance:
             mas_reg = 0.0
-            print("MAS")
+            
             for name, param in model.named_parameters():
                 if name in self.old_params:
                     mas_reg += (self.importance[name] * (param - self.old_params[name]).pow(2)).sum()

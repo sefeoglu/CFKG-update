@@ -1,4 +1,5 @@
 import torch
+
 from transformers import Seq2SeqTrainer
 
 class SISeq2SeqTrainer(Seq2SeqTrainer):
@@ -44,6 +45,7 @@ class SISeq2SeqTrainer(Seq2SeqTrainer):
         return loss
 
     def update_omega(self):
+        """omega is used for surrogate loss"""
         for n, p in self.model.named_parameters():
             delta = p.detach() - self.prev_params[n]
             self.omega[n] += self.w[n] / (delta ** 2 + self.epsilon)
