@@ -1,12 +1,14 @@
-## Continual Factual Knowledge Graph Updates
+# SHACL-Based Symbolic Memory for Continual Relation Extraction
 
 <p align="center">
   <img src="https://github.com/sefeoglu/CFKG-update/blob/master/figs/pipeline_method.png" width="800"/>
 </p>
 
-# SHACL-Based Symbolic Memory for Continual Relation Extraction
+
 
 This repository contains the implementation of a framework combining **continual few-shot relation extraction** with **schema-aware symbolic validation**. The approach leverages synaptic regularization methods and a SHACL-based symbolic memory layer to mitigate catastrophic forgetting and distinguish between true hallucinations and semantically valid out-of-schema predictions.
+
+* The article of the repository has been submitted to **Journal of Web Semantics**.
 
 ## Overview
 
