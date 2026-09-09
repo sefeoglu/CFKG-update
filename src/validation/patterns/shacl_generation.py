@@ -1,7 +1,7 @@
 import json, re
 from pathlib import Path
 
-src = Path("/mnt/data/canonicals.json")
+src = Path("./data/canonicals.json")
 data = json.loads(src.read_text(encoding="utf-8"))
 
 def slug(label: str) -> str:
