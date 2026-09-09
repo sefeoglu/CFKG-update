@@ -89,7 +89,7 @@ for pid, rec in data.items():
         ttl_parts.append(emit_suggest_shape(alt, canonical))
         shape_count += 1
 
-out_path = Path("/mnt/data/shapes.generated.ttl")
+out_path = Path("./data/shapes.generated.ttl")
 out_path.write_text("".join(ttl_parts), encoding="utf-8")
 
 # show a small preview and a sanity check on spouse (P26)
